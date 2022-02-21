@@ -69,6 +69,7 @@ class ForecastNotifier extends ChangeNotifier{
     } catch (err) {
       hasError = true;
     } finally {
+
       toggleLoading();
     }
   }

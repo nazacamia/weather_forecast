@@ -15,10 +15,11 @@ class ErrorCard extends StatelessWidget {
             color: Color.fromRGBO(255, 255, 255, 0.4)
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             connectionErr
-                ? const Icon(Icons.network_check, size: 40,)
-                : const Icon(Icons.error, size: 40,),
+                ? const Icon(Icons.error, size: 40,)
+                : const Icon(Icons.network_check, size: 40,),
             const SizedBox(height: 10,),
             connectionErr
                 ? const Text('Apparently something went wrong')

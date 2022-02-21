@@ -45,7 +45,7 @@ class SecondaryInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width/3.4,
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(6),
       decoration: const BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.all(Radius.circular(8))
@@ -55,11 +55,11 @@ class SecondaryInfoCard extends StatelessWidget {
           Row(
             children:  [
               icon,
-              const SizedBox(width: 5,),
+              const SizedBox(width: 2,),
               Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
             ],
           ),
-          Text(data, style: const TextStyle(color: Colors.white, fontSize: 20),),
+          Text(data, style: const TextStyle(color: Colors.white, fontSize: 18),),
         ],
       ),
     );

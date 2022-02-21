@@ -42,6 +42,8 @@ class _HomeBodyState extends State<HomeBody> {
               return const ErrorCard();
             } else {
               Forecast tmpForecast = snapshot.data as Forecast;
+
+              /// Initialize Provider
               context.read<ForecastNotifier>().initTodayForecast(tmpForecast);
 
               return Consumer<ForecastNotifier>(
@@ -50,17 +52,21 @@ class _HomeBodyState extends State<HomeBody> {
                       return Image.asset('assets/images/Sun.gif');
 
                     } else {
-                      return ListView(
-                        children: const [
-                          MainForecastCard(),
-                          SizedBox(height: 5),
-                          SecondaryInfoWidget(),
-                          SizedBox(height: 5),
-                          FiveDaysForecastCard(),
-                          SizedBox(height: 5),
-                          OpenMapButton()
-                        ],
-                      );
+                      if (forecastNot.hasError) {
+                        return const ErrorCard(connectionErr: true);
+                      } else {
+                        return ListView(
+                          children: const [
+                            MainForecastCard(),
+                            SizedBox(height: 5),
+                            SecondaryInfoWidget(),
+                            SizedBox(height: 5),
+                            FiveDaysForecastCard(),
+                            SizedBox(height: 5),
+                            OpenMapButton()
+                          ],
+                        );
+                      }
                     }
                   });
             }

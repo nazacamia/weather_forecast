@@ -7,6 +7,8 @@ class ForecastNotifier extends ChangeNotifier{
 
   bool isLoading = false;
 
+  bool hasError = false;
+
   /// Today's weather
   late Forecast _today;
 
@@ -55,18 +57,20 @@ class ForecastNotifier extends ChangeNotifier{
 
   /// Updates today's and next 4 days weather forecast
   void updateTodayForecast() async {
-
     toggleLoading();
-    print(isLoading);
-    Forecast tmpForecast = await RemoteServices.fetchCurrentForecast();
-    _today = tmpForecast;
-
-    List<Forecast> tmpForecastList = await RemoteServices.fetchFiveDayForecast();
-    _forecastList.clear();
-    _forecastList.addAll(tmpForecastList);
-    toggleLoading();
-    print(isLoading);
-    notifyListeners();
+    try {
+      Forecast tmpForecast = await RemoteServices.fetchCurrentForecast();
+      _today = tmpForecast;
+      List<Forecast> tmpForecastList = await RemoteServices.fetchFiveDayForecast();
+      _forecastList.clear();
+      if (tmpForecastList.isNotEmpty) {
+        _forecastList.addAll(tmpForecastList);
+      }
+    } catch (err) {
+      hasError = true;
+    } finally {
+      toggleLoading();
+    }
   }
 
   void toggleLoading() {

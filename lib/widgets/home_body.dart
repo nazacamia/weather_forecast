@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 import 'package:weather_forecast/models/forecast_model.dart';
 import 'package:weather_forecast/models/forecast_notifier.dart';
@@ -8,6 +10,7 @@ import 'package:weather_forecast/util/constants.dart';
 import 'package:weather_forecast/widgets/cards/error_card.dart';
 import 'package:weather_forecast/widgets/cards/main_weather_card.dart';
 import 'package:weather_forecast/widgets/cards/five_days_forecast_card.dart';
+import 'package:weather_forecast/widgets/secondary_info_widget.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({Key? key}) : super(key: key);
@@ -41,23 +44,44 @@ class _HomeBodyState extends State<HomeBody> {
             } else {
               Forecast tmpForecast = snapshot.data as Forecast;
               context.read<ForecastNotifier>().initTodayForecast(tmpForecast);
-              return ListView(
-                children:  [
-                  const MainForecastCard(),
-                  const FiveDaysForecastCard(),
-                  const SizedBox(height: 5),
-                  Center(
-                    child: MaterialButton(
-                      color: Colors.black,
-                      onPressed: ()=> LocalServices.launchURL(Constants.webPage),
-                      child: const Text('Open weather map', style: TextStyle(color: Colors.white),),
-                    ),
-                  )
-                ],
-              );
+
+              return Consumer<ForecastNotifier>(
+                  builder: (context, forecastNot, child) {
+                    if (forecastNot.isLoading) {
+                      return Image.asset('assets/images/Sun.gif');
+
+                    } else {
+                      return ListView(
+                        children: const [
+                          MainForecastCard(),
+                          SizedBox(height: 5),
+                          SecondaryInfoWidget(),
+                          SizedBox(height: 5),
+                          FiveDaysForecastCard(),
+                          SizedBox(height: 5),
+                          OpenMapButton()
+                        ],
+                      );
+                    }
+                  });
             }
         }
       }
       );
+  }
+}
+
+class OpenMapButton extends StatelessWidget {
+  const OpenMapButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: MaterialButton(
+        color: Colors.black,
+        onPressed: ()=> LocalServices.launchURL(Constants.webPage),
+        child: const Text('Open weather map', style: TextStyle(color: Colors.white),),
+      ),
+    );
   }
 }

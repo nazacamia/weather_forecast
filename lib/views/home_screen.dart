@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
             color: Color.fromRGBO(255,204,0,1)
         ),
         child: const SafeArea(
+          bottom: false,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 20),
             child: HomeBody(),

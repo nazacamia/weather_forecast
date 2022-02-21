@@ -17,4 +17,5 @@ The App is made by a single page (HomeScreen) in which there are:
 - Floating action button:
 	- Tap to download and refresh data
 
-If I had more time I would’ve implemented LocalStorage and SharedPreferences management, some animations and optimized the UI.
+If I had more time I would’ve implemented LocalStorage and SharedPreferences management,
+ some animations in order to make user experience smoother and optimized the UI.

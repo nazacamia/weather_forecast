@@ -28,7 +28,7 @@ class Forecast {
         LocalServices.kelvinToCelsius((data['main']['temp'])),
         LocalServices.kelvinToCelsius((data['main']['temp_min'])),
         LocalServices.kelvinToCelsius((data['main']['temp_max'])),
-        LocalServices.kelvinToCelsius((data['main']['feels_like'])),
+        LocalServices.kelvinToCelsius(double.parse((data['main']['feels_like']).toString())),
         DateTime.fromMillisecondsSinceEpoch(data['dt'] * 1000),
         DateTime.now(),
         data['main']['humidity'],

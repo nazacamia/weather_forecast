@@ -44,7 +44,7 @@ class SecondaryInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width/3.2,
+      width: MediaQuery.of(context).size.width/3.4,
       padding: const EdgeInsets.all(8),
       decoration: const BoxDecoration(
           color: Colors.black,
@@ -59,7 +59,7 @@ class SecondaryInfoCard extends StatelessWidget {
               Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
             ],
           ),
-          Text(data, style: const TextStyle(color: Colors.white, fontSize: 25),),
+          Text(data, style: const TextStyle(color: Colors.white, fontSize: 20),),
         ],
       ),
     );
